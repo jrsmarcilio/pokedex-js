@@ -10,10 +10,8 @@ const typeorm_1 = require("typeorm");
     database: process.env.RDS_DB_NAME,
     username: process.env.RDS_USERNAME,
     logging: true,
-    migrationsRun: true,
-    synchronize: false,
+    synchronize: true,
     entities: [__dirname + "/../entities/*.js"],
-    migrations: [__dirname + "/./migrations/*.js"],
 })
     .then(() => {
     console.log("Connected to the database.");

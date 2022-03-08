@@ -3,12 +3,12 @@ import { createConnection } from "typeorm";
 
 createConnection({
   type: "mysql",
-  host: process.env.RDS_HOSTNAME,
+  host: "172.17.0.2",
   port: 3306,
-  username: process.env.RDS_USERNAME,
-  password: process.env.RDS_PASSWORD,
-  database: process.env.RDS_DB_NAME,
-  entities: [__dirname + "/../entities/*.ts"],
+  username: "root",
+  password: "34544615",
+  database: "pokemon_db",
+  entities: [__dirname + "/../entities/*.js"],
   synchronize: true,
   logging: true,
 })

@@ -2,19 +2,17 @@ import "dotenv/config";
 import { createConnection } from "typeorm";
 
 createConnection({
-  database: process.env.RDS_DB_NAME,
+  type: "mysql",
+  port: 3306,
   host: process.env.RDS_HOSTNAME,
   password: process.env.RDS_PASSWORD,
-  port: 3306,
-  type: "mysql",
+  database: process.env.RDS_DB_NAME,
   username: process.env.RDS_USERNAME,
-  
+
   logging: true,
-  migrationsRun: true,
-  synchronize: false,
-  
+  synchronize: true,
+
   entities: [__dirname + "/../entities/*.js"],
-  migrations: [__dirname + "/./migrations/*.js"],
 })
   .then(() => {
     console.log("Connected to the database.");

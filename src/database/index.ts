@@ -12,9 +12,7 @@ createConnection({
   logging: true,
   synchronize: true,
 
-  entities: [__dirname + "/../entities/*.js"],
+  entities: [__dirname + "/../entities/*.ts", __dirname + "/../entities/*.js"],
 })
-  .then(() => {
-    console.log("Connected to the database.");
-  })
+  .then(() => console.log("Connected to the database."))
   .catch((err) => console.error("Error Connected", err));

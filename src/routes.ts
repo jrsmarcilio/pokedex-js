@@ -1,14 +1,13 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 
-import { CreatePokemonController } from "./controller";
+import { CreatePokemonController, ShowPokemonController } from "./controller";
 
 const createPokemonController = new CreatePokemonController();
+const showPokemonController = new ShowPokemonController();
 
 const routes = Router();
 
 routes.post("/pokemon", createPokemonController.handle);
-routes.get("/", (req: Request, res: Response) =>
-  res.sendStatus(200).json({ application: "running" })
-);
+routes.get("/pokemon", showPokemonController.store);
 
 export { routes };

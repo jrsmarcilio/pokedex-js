@@ -15,8 +15,16 @@ class ShowPokemonController {
     store(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const showPokemonService = new ShowPokemonService_1.ShowPokemonService();
-            const pokemons = yield showPokemonService.index();
+            const pokemons = yield showPokemonService.findAll();
             return response.json(pokemons);
+        });
+    }
+    index(request, response, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const name = request.params.name;
+            const showPokemonService = new ShowPokemonService_1.ShowPokemonService();
+            const pokemon = yield showPokemonService.findOne(name);
+            return response.json(pokemon);
         });
     }
 }

@@ -9,28 +9,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ShowPokemonService = void 0;
+exports.UpdatePokemonService = void 0;
 const typeorm_1 = require("typeorm");
 const PokemonRepositories_1 = require("../../repositories/PokemonRepositories");
-class ShowPokemonService {
-    findAll() {
+class UpdatePokemonService {
+    updated({ id, name, image, attack, defense, primaryPower, secondaryPower, }) {
         return __awaiter(this, void 0, void 0, function* () {
             const pokemonRepository = (0, typeorm_1.getCustomRepository)(PokemonRepositories_1.PokemonRepositories);
-            const pokemons = yield pokemonRepository.find();
-            if (!pokemons)
-                throw new Error("Seu arremesso falhou! Pokébola vázia.");
-            return pokemons;
-        });
-    }
-    findOne(name) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const pokemonRepository = (0, typeorm_1.getCustomRepository)(PokemonRepositories_1.PokemonRepositories);
-            const pokemon = yield pokemonRepository.findOne(name);
+            const pokemon = yield pokemonRepository.findOne(id);
             if (!pokemon)
-                throw new Error("Seu arremesso falhou! Pokébola vázia.");
-            return pokemon;
+                throw new Error("O Arremesso falhou! Pokébola vázia.");
+            const pokemonUpdated = yield pokemonRepository.update({ id }, {
+                name: name || pokemon.name,
+                image: image || pokemon.image,
+                attack: attack || pokemon.attack,
+                defense: defense || pokemon.defense,
+                primaryPower: primaryPower || pokemon.primaryPower,
+                secondaryPower: secondaryPower || pokemon.secondaryPower,
+            });
+            return pokemonUpdated;
         });
     }
 }
-exports.ShowPokemonService = ShowPokemonService;
-//# sourceMappingURL=ShowPokemonService.js.map
+exports.UpdatePokemonService = UpdatePokemonService;
+//# sourceMappingURL=UpdatePokemonService.js.map
